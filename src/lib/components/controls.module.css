@@ -1,0 +1,55 @@
+.shuffle-buttons {
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    position: relative;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    transform: translate(-10px, 0px);
+}
+
+.play-and-slider {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+}
+
+.slider-container {
+    --d:330px;
+    --angle:120deg; 
+    --sinus:0.866; /* = sinus(angle) */
+    width: 330px;
+    height: 4px;
+    background: linear-gradient(124deg, rgba(255,0,0,1) 0%, rgba(243,255,0,1) 25%, rgba(0,247,255,1) 50%, rgba(37,0,255,1) 76%, rgba(255,0,179,1) 100%);
+    background-size: calc(var(--d)/var(--sinus)) 100%;
+    animation: InfiniteMove 3s linear infinite reverse;
+    border-radius: 8px;
+    position: relative;
+}
+
+.slider-scrubber {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    top: -8px;
+}
+
+.slider-inner {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #d6d2d2;
+}
+ 
+
+@keyframes InfiniteMove {
+    0% {
+        background-position: calc(var(--d)/var(--sinus)) 0;
+    }
+}
+

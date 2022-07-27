@@ -1,0 +1,15 @@
+.song-waveform {
+    position: absolute;
+    right: 0px;
+    top: 12px;
+}
+
+rect {
+    fill: #cecece;
+}
+
+
+rect.elapsed {
+    fill: #7c7b7b;
+}
+

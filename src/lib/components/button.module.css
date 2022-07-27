@@ -1,0 +1,30 @@
+.play-btn {
+     width: 0px;
+     height: 0px;
+     border-style: solid;
+     border-width: 10px 0px 10px 16px;
+     border-color: transparent transparent transparent black; 
+     cursor: pointer;
+}
+
+.playing {
+    width: 20px;
+    height: 20px;
+    border-color: black;
+    border-style: double;
+    border-width: 0px 0px 0px 20px;
+    margin-left: -3px;
+}
+
+.play-btn-wrapper {
+     z-index: 1000000;
+     margin-right: 0px;
+     margin-top: unset;
+     width: 26px;
+     height: 50px;
+     padding: 12px;
+     padding-top: 12px;
+     border: none !important;
+     display: flex;
+     align-items: center;
+}
