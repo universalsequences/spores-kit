@@ -1,4 +1,5 @@
 import {useState, useCallback} from 'react';
+import {useSporeData} from './lib/hooks/useSporeData.js';
 import logo from './logo.svg';
 import './App.css';
 import {SporeEmbed} from './lib/components/SporeEmbed.js';
@@ -26,22 +27,44 @@ function App() {
 
     let [main, setMain] = useState(songs[0]);
     let [alternate, setAlternate] = useState(songs[1]);
-
-    const onClickNext=  useCallback(() => {
-        let index = songs.indexOf(alternate);
-        index = (index + 1) % songs.length;
-        setAlternate(songs[index]);
-    }, [alternate, setAlternate]);
+    let {
+        isStuttering,
+        stutterRate,
+        currentStep,
+        bpm,
+        playing,
+        currentBeat,
+        progress
+    } =
+        useSporeData();
 
     // bottom right slider controls cross-fade between main & alternate
     return (
         <div className={styles["test-container"]}>
-          <div
-            onClick={onClickNext}
-            className="next-song">
-            Next Track
+          <div>
+            BPM: {bpm}
           </div>
-          <SporeEmbed backgroundColor="black" color="blue" skin={skin} main={main} alternate={alternate} juiceSamples={juiceSamples}/>
+          <div>
+            Current Step: {currentStep}
+          </div>
+          <div>
+            Current Beat: {currentBeat}
+          </div>
+          <div>
+            Song Progress: {Math.round(progress)}%
+          </div>
+          {isStuttering &&
+           <div>
+             Stuttering at 1/{stutterRate} rate
+           </div>}
+          <SporeEmbed
+            main={main} // url to main track (can be switched w/o interrupting)
+            alternate={alternate} // url to alternate track (can be switched w/o interrupting)
+            juiceSamples={juiceSamples} // list of URLs to samples
+            backgroundColor="black" // background color of Spore itselft
+            color="blue" // color of waveform below
+            skin={skin} // URL to image to be morphed on skin
+          />
         </div>
   );
 }

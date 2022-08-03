@@ -3,7 +3,7 @@ import {useSporeLoader} from '../hooks/useSporeLoader.js';
 import {SporeControls} from './SporeControls.js';
 import styles from './spore-embed.module.css';
 
-const CID = "QmUgdZoJKfX66VFpsXNAZ3hWG7gjeYeydiYKYYV8Wvso5T";
+const CID = "QmajcsuDRCpA4sS615Zu1dkKy5iYMtz35PdRa4YsE47yNX";
 const SPORE_URL = `https://zequencer.mypinata.cloud/ipfs/${CID}?token=26&gallery=true`;
 
 export const SporeEmbed = ({backgroundColor, main, alternate, juiceSamples, skin, className, color="black"}) => { 

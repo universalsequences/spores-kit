@@ -3,7 +3,7 @@
 *Spores Kit* allows you to bring a *Spore* into your site, and customize the experience.
 For more information about *Spores*, go to the [spores.vision](https://spores.vision).
 
-The accompanying Zora x ETHGlobal presention slides can be found [here](https://www.figma.com/proto/ucetVWnSHufW7N2ZklNwaC/Spores-Presentation?node-id=12%3A420&scaling=contain&page-id=0%3A1);
+The accompanying Zora x ETHGlobal presentation slides can be found [here](https://www.figma.com/proto/ucetVWnSHufW7N2ZklNwaC/Spores-Presentation?node-id=12%3A420&scaling=contain&page-id=0%3A1);
 
 
 # Setting Up
@@ -98,6 +98,36 @@ You can also set any image as the skin, via the **skin** prop.
 | backgroundColor | color of the player background (in HEX format) |
 | skin | URL to an image to be used as a distorted skin |
 
+## Playback Stats
+
+Using the hook `useSporeData` you can get some realtime data from the Spore to visualize them in cool ways.
+Most of the data is concerned with playback. 
+
+```TSX
+        const {
+          bpm,
+          playing,
+          currentStep,
+          currentBeat,
+          progress,
+          isStuttering,
+          stutterRate,
+          } = useSporeData();
+
+The data returned by `useSporeData` is as follows:
+
+```
+| Value  | Description |
+| ------------- | ------------- |
+| bpm | BPM of *main* audio track (alternate is synced to this BPM) |
+| playing | true/false whether track is playing |
+| currentStep | current step 0-63 of the track (for visualization) |
+| currentBeat | current beat 0-7 of the track (for visualization)  |
+| progress | % of track progressed so far |
+| isStuttering | true when stutter effect is engaged |
+| stutterRate | rate at which it is stuttering (controllable via Spore) |
+
+
 ## Diagram of the *Spore* Controls
 
 ![yo](https://zequencer.mypinata.cloud/ipfs/QmdHeZq7U2YFRzrVr1YgqgqjLcNNUGownNzxwJR7esx1ZV)
@@ -108,6 +138,8 @@ You can also set any image as the skin, via the **skin** prop.
 Use the [Zora API](https://api.zora.co/) to dig for tracks that mix well together. Passing them as **main** and **alternate** tracks.
 
 Since you can switch tracks without interrupting playback, you could create a web3 DJ deck, where you queue tracks and swap them in at will. The surrounding front-end is yours to imagine, but taking inspo from DJ gear would be tight. 
+
+Utilize the `currentBeat` from `useSporeData` to visualize the looping going on in any way you want.
 
 
 ### Ambience Machine
