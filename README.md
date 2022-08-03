@@ -55,6 +55,46 @@ Notes:
 * The *Spore* needs to fetch songs, which might take a little time depending on file size.
 * On the *Spore* player, the *bottom-right slider* controls the cross-fade between the `main` and `alternate` tracks.
 
+## Full Spec. of Props
+
+| Prop Name | Description |
+| ------------- | ------------- |
+| main | URL to *main* audio track |
+| alternate  | URL to *alternate* audio track (to be cross-faded) |
+| juiceSamples | list of URLs of additional samples |
+| color | color of the waveform (in HEX format) |
+| backgroundColor | color of the player background (in HEX format) |
+| skin | URL to an image to be used as a distorted skin |
+
+## Playback Stats
+
+Using the hook `useSporeData` you can get some realtime data from the Spore to visualize them in cool ways.
+Most of the data is concerned with playback. 
+
+```TSX
+        const {
+          bpm,
+          playing,
+          currentStep,
+          currentBeat,
+          progress,
+          isStuttering,
+          stutterRate,
+          } = useSporeData();
+```
+
+The data returned by `useSporeData` is as follows:
+
+| Value  | Description |
+| ------------- | ------------- |
+| bpm | BPM of *main* audio track (alternate is synced to this BPM) |
+| playing | true/false whether track is playing |
+| currentStep | current step 0-63 of the track (for visualization) |
+| currentBeat | current beat 0-7 of the track (for visualization)  |
+| progress | % of track progressed so far |
+| isStuttering | true when stutter effect is engaged |
+| stutterRate | rate at which it is stuttering (controllable via Spore) |
+
 ## Juice Loops
 
 The *Spore* player supports mixing in your own loops. We call these *Juice Loops*. Think of it as a sample bank-- a list of samples-- that can add variation to a mix.
@@ -86,46 +126,6 @@ You can also set any image as the skin, via the **skin** prop.
 ```TSX
 <SporeEmbed main={mainSongURL} alternate={alternateSongURL} skin={urlToSkin} color={"#ffffff"}/>
 ```
-
-## Full Spec. of Props
-
-| Prop Name | Description |
-| ------------- | ------------- |
-| main | URL to *main* audio track |
-| alternate  | URL to *alternate* audio track (to be cross-faded) |
-| juiceSamples | list of URLs of additional samples |
-| color | color of the waveform (in HEX format) |
-| backgroundColor | color of the player background (in HEX format) |
-| skin | URL to an image to be used as a distorted skin |
-
-## Playback Stats
-
-Using the hook `useSporeData` you can get some realtime data from the Spore to visualize them in cool ways.
-Most of the data is concerned with playback. 
-
-```TSX
-        const {
-          bpm,
-          playing,
-          currentStep,
-          currentBeat,
-          progress,
-          isStuttering,
-          stutterRate,
-          } = useSporeData();
-
-The data returned by `useSporeData` is as follows:
-
-```
-| Value  | Description |
-| ------------- | ------------- |
-| bpm | BPM of *main* audio track (alternate is synced to this BPM) |
-| playing | true/false whether track is playing |
-| currentStep | current step 0-63 of the track (for visualization) |
-| currentBeat | current beat 0-7 of the track (for visualization)  |
-| progress | % of track progressed so far |
-| isStuttering | true when stutter effect is engaged |
-| stutterRate | rate at which it is stuttering (controllable via Spore) |
 
 
 ## Diagram of the *Spore* Controls
