@@ -1,0 +1,14 @@
+.cross-fader {
+    width: 200px;
+    height: 20px;
+    background-color: black;
+    position: relative;
+}
+
+.cross-fade-scrubber {
+    position: absolute;
+    background-color: red;
+    width: 20px;
+    height: 40px;
+    transform: translate(-10px, -8px);
+}

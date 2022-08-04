@@ -1,3 +1,4 @@
+import {CrossFader} from './lib/components/CrossFader.js';
 import {useState, useCallback} from 'react';
 import {useSporeData} from './lib/hooks/useSporeData.js';
 import logo from './logo.svg';
@@ -27,6 +28,8 @@ function App() {
 
     let [main, setMain] = useState(songs[0]);
     let [alternate, setAlternate] = useState(songs[1]);
+    let [crossFadeUI, setCrossFadeUI] = useState(0);
+
     let {
         isStuttering,
         stutterRate,
@@ -34,7 +37,8 @@ function App() {
         bpm,
         playing,
         currentBeat,
-        progress
+        progress,
+        crossFade
     } =
         useSporeData();
 
@@ -53,10 +57,17 @@ function App() {
           <div>
             Song Progress: {Math.round(progress)}%
           </div>
-          {isStuttering &&
+          <div>
+            Cross Fade: {crossFade}
+          </div>
+          {isStuttering ?
            <div>
              Stuttering at 1/{stutterRate} rate
-           </div>}
+           </div> : ""}
+          <CrossFader
+            crossFade={crossFade} // cross fade returned from Spore Player (via useSporeData)
+            setCrossFade={setCrossFadeUI} // sets the state variable in this component (to be passed into SporeEmbed)
+          />
           <SporeEmbed
             main={main} // url to main track (can be switched w/o interrupting)
             alternate={alternate} // url to alternate track (can be switched w/o interrupting)
@@ -64,6 +75,7 @@ function App() {
             backgroundColor="black" // background color of Spore itselft
             color="blue" // color of waveform below
             skin={skin} // URL to image to be morphed on skin
+            crossFade={crossFadeUI} // set this to override the cross fade between main / alternate (w/o using the Spore)
           />
         </div>
   );

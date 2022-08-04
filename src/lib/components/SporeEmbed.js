@@ -1,15 +1,24 @@
-import React, { useRef, useEffect, useCallback, useState} from 'react';
+import React, { useRef, useEffect } from 'react';
 import {useSporeLoader} from '../hooks/useSporeLoader.js';
+import {useSporeCrossFader} from '../hooks/useSporeCrossFader.js';
 import {SporeControls} from './SporeControls.js';
 import styles from './spore-embed.module.css';
 
-const CID = "QmajcsuDRCpA4sS615Zu1dkKy5iYMtz35PdRa4YsE47yNX";
+const CID = "QmRVUMVcmrfcD6z8mcrFe2a6aod9RHERTdVwtVeCXFeJ3y";
 const SPORE_URL = `https://zequencer.mypinata.cloud/ipfs/${CID}?token=26&gallery=true`;
 
-export const SporeEmbed = ({backgroundColor, main, alternate, juiceSamples, skin, className, color="black"}) => { 
+export const SporeEmbed = ({backgroundColor, main, alternate, juiceSamples, skin, className, color="black", crossFade}) => { 
     let ref = useRef();
 
     useSporeLoader({ref, main, alt: alternate, juiceSamples, skin});
+
+    let {setCrossFade} = useSporeCrossFader(ref);
+
+    useEffect(() => {
+        if (crossFade !== undefined) {
+            setCrossFade(crossFade);
+        }
+    }, [crossFade, setCrossFade]);
 
     return (
         <div className={styles["spore-embed-container"] + " " + className}>

@@ -65,6 +65,7 @@ Notes:
 | color | color of the waveform (in HEX format) |
 | backgroundColor | color of the player background (in HEX format) |
 | skin | URL to an image to be used as a distorted skin |
+| crossFade | overrides the current cross-fade between main and alternate tracks |
 
 ## Playback Stats
 
@@ -80,6 +81,7 @@ Most of the data is concerned with playback.
           progress,
           isStuttering,
           stutterRate,
+          crossFade
           } = useSporeData();
 ```
 
@@ -94,6 +96,7 @@ The data returned by `useSporeData` is as follows:
 | progress | % of track progressed so far |
 | isStuttering | true when stutter effect is engaged |
 | stutterRate | rate at which it is stuttering (controllable via Spore) |
+| crossFade | crossFade between main and alternate tracks (0-1) |
 
 ## Juice Loops
 

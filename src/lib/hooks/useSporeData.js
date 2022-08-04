@@ -3,6 +3,7 @@ import {useEffect, useCallback, useState} from 'react';
 export const useSporeData = () => {
     let [currentBeat, setCurrentBeat] = useState(0);
     let [playing, setPlaying] = useState(false);
+    let [crossFade, setCrossFade] = useState(0);
     let [bpm, setBPM] = useState(undefined);
     let [currentStep, setCurrentStep] = useState(undefined);
     let [isStuttering, setIsStuttering] = useState(undefined);
@@ -12,7 +13,7 @@ export const useSporeData = () => {
     useEffect(() => {
         window.addEventListener("message", onMessage);
         return () => window.removeEventListener("message", onMessage); 
-    }, [setCurrentBeat, setPlaying, setBPM]);
+    }, [setCurrentBeat, setPlaying, setBPM, setProgress, setCrossFade]);
 
     const onMessage = useCallback((e) => {
         if (e.data.type === "current-beat") {
@@ -36,7 +37,10 @@ export const useSporeData = () => {
         if (e.data.type === "song-player-progress") {
             setProgress(e.data.body);
         }
-    }, [setCurrentBeat, setPlaying, setBPM, setProgress]);
+        if (e.data.type === "cross-fade-value") {
+            setCrossFade(e.data.body);
+        }
+    }, [setCurrentBeat, setPlaying, setBPM, setProgress, setCrossFade]);
 
     return {
         currentStep,
@@ -45,6 +49,7 @@ export const useSporeData = () => {
         bpm,
         stutterRate,
         isStuttering,
-        progress
+        progress,
+        crossFade
     };
 };
